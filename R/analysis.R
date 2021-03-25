@@ -193,12 +193,15 @@ posterior_histogram_ <- function(posterior_samples, bins = NULL, binwidth = NULL
     }
 
     if (is.null(bins)) {
-        return(ggplot2::ggplot(data = data.frame(x = posterior_samples)) +
-        ggplot2::geom_histogram(ggplot2::aes(x = x), binwidth = binwidth))
+        return(ggplot2::ggplot(data = data.frame(x = posterior_samples),
+                               ggplot2::aes(x = x)) +
+        ggplot2::geom_histogram(ggplot2::aes(y = ..density..),
+                                binwidth = binwidth))
     }
 
-    ggplot2::ggplot(data = data.frame(x = posterior_samples)) +
-    ggplot2::geom_histogram(ggplot2::aes(x = x), bins = bins)
+    ggplot2::ggplot(data = data.frame(x = posterior_samples),
+                    ggplot2::aes(x = x)) +
+    ggplot2::geom_histogram(ggplot2::aes(y = ..density..), bins = bins)
 }
 
 #' @noRd
